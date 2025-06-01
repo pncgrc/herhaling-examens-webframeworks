@@ -25,7 +25,7 @@ const ShoppingList = () => {
     }
 
     const removeItem = (i: number) => {
-        let copy = shoppingList.filter((e, index) => index !== i);
+        let copy = shoppingList.filter((element, index) => index !== i);
         setShoppingList(copy);
     }
 
