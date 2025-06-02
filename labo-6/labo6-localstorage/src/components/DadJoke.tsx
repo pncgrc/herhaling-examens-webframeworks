@@ -31,7 +31,7 @@ const DadJoke = () => {
 
     useEffect(() => {
         localStorage.setItem("favJoke", favJoke)
-    }, [favJoke]); 
+    }, [favJoke]);
     
     return(
         <>
