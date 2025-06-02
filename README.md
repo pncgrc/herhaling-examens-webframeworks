@@ -87,7 +87,7 @@ const removeItem = (i: number) => {
 useEffect(() => {
     fetch("link")
         .then(resp => resp.json())
-        .then(data => setData(data)) //set functie wel aanpassen!
+        .then(data: Type => setData(data)) //set functie wel aanpassen!
 }, []); // dependency aanpassen indien nodig
 ```
 OF met een async function en die dan in de useEffect gebruiken
@@ -113,7 +113,8 @@ useEffect(() => {
 &nbsp;
 &nbsp;
 
-## Context API (uit labo8-basic-context)
+## Context API 
+(uit labo8-basic-context)
 
 1. Context aanmaken met bijhorende interface in App.tsx
 ```
@@ -140,7 +141,7 @@ function App() { // Deze app zou de kleur van de 3 Square componenten in SquareR
 }
 ```
 
-3. Gebruik de context in elk gewenst componentje met useContext (wel niet vergeten te importeren!)
+3. Gebruik de context in elk gewenst componentje met useContext **(wel niet vergeten te importeren!)**
 ```
 import { useContext } from "react";
 import { SettingsContext } from "../App";
@@ -179,3 +180,77 @@ const SelectBox = () => {
 &nbsp;
 
 # NextJS
+
+&nbsp;
+## Basics
+
+&nbsp;
+### NextJS project aanmaken
+
+```
+npx create-next-app@latest
+```
+Set up **(Let goed op dat je gebruik maakt van TypeScript en dat je de App Router niet gebruikt!)**: 
+```
+What is your project named? my-app
+Would you like to use TypeScript? Yes
+Would you like to use ESLint? No
+Would you like to use Tailwind CSS? No
+Would you like to use `src/` directory? Yes
+Would you like to use App Router? (recommended) No
+Would you like to customize the default import alias? No
+What import alias would you like configured? @/*
+```
+
+### Huidige link zetten als active
+Uiteraard moet de styling aan bv global.css toegevoegd worden
+```
+<Link href="/" className={ router.pathname === "/" ? styles.active : "" } />
+<Link href="/pokemon" className={ router.pathname.includes("/pokemon") ? styles.active : "" }
+```
+
+### In-app API verbinden met een ander API
+In dit voorbeeld werkte de oefening met pokeapi
+```
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+
+    if (req.method === "GET") {
+        const id = Number(req.query.id);
+        const response = await fetch(`apiurl/pokemon/${id}`);
+        const data: ApiDataType = await response.json();
+
+        res.status(200).json({
+            id: data.id,
+            name: data.name,
+            ...
+        })
+        
+    }
+    else {
+        res.status(405).json({ "message": "Only GET requests allowed!" });
+    }
+}
+```
+
+Voor een lijst met objecten:
+
+```
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+
+    if (req.method === "GET") {
+        const response = await fetch("apiurl/pokemon/");
+        const data: ApiDataType = await response.json();
+
+        res.status(200).json(data.map(pokemon => {
+            return {
+                id: parseInt(pokemon.url.replace("apiurl/pokemon/", "").replace("/", "")), // bv: apiurl/pokemon/1/ ==> 1
+                name: pokemon.name
+            }
+        }))
+        
+    }
+    else {
+        res.status(405).json({ "message": "Only GET requests allowed!" });
+    }
+}
+```

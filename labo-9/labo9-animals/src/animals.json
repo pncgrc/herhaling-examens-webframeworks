@@ -1,0 +1,17 @@
+[
+    {
+        "id": 0,
+        "name": "cat",
+        "imglink": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/960px-Cat_August_2010-4.jpg"
+    },
+    {
+        "id": 1,
+        "name": "dog",
+        "imglink": "https://www.dogstrust.org.uk/images/800x600/assets/2025-03/toffee%202.jpg"
+    },
+    {
+        "id": 2,
+        "name": "hamster",
+        "imglink": "https://www.dierenkliniektiel.nl/app/uploads/2023/05/Hamster-algemeen.jpg"
+    }
+]
