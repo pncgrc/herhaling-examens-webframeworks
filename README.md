@@ -140,8 +140,11 @@ function App() { // Deze app zou de kleur van de 3 Square componenten in SquareR
 }
 ```
 
-3. Gebruik de context in elk gewenst componentje met useContext
+3. Gebruik de context in elk gewenst componentje met useContext (wel niet vergeten te importeren!)
 ```
+import { useContext } from "react";
+import { SettingsContext } from "../App";
+
 const Square = () => {
     const { color } = useContext(SettingsContext); //In dit componentje hebben wij enkel de kleur nodig, dus enkel color wordt gedeclareerd
 
@@ -154,6 +157,9 @@ const Square = () => {
 ```
 OF je kan meerdere context props gebruiken
 ```
+import { useContext } from "react";
+import { SettingsContext } from "../App";
+
 const SelectBox = () => {
     const { color, setColor } = useContext(SettingsContext);
 
