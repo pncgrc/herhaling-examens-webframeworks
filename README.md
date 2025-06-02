@@ -1,6 +1,6 @@
-# herhaling-examens-webframeworks
+# React basics
 
-## Array functies voorbeelden
+## Array functies
 
 &nbsp;
 ### Filteren bij input verandering
@@ -51,6 +51,8 @@ const sumOfAll = () => {
     return counters.reduce((prev, curr) => prev + curr, 0); // 0 is hier de initial value, zonder init value breekt de app !!
 }
 ```
+&nbsp;
+## Array state
 
 &nbsp;
 ### Item in array state toevoegen
@@ -59,7 +61,8 @@ setShoppingList([...shoppingList, {name, quantity}]); // in dit geval was de arr
 ```
 
 &nbsp;
-### Item in array state wijzigen (mappen over array en wijzigen indien opgegeven index gelijk is aan gemapte index, daarna array opnieuw setten met de copy)
+### Item in array state wijzigen 
+Mappen over array en wijzigen indien opgegeven index gelijk is aan gemapte index, daarna array opnieuw setten met de copy
 ```
 const decreaseCounter = (i: number) => {
     let copy = counters.map((oldValue, index) => index === i ? oldValue - 1 : oldValue);
@@ -68,10 +71,10 @@ const decreaseCounter = (i: number) => {
 ```
 
 &nbsp;
-### Item in array state verwijderen (element wordt niet vermeld na de arrow, maar moet er wel staan!)
+### Item in array state verwijderen
 ```
 const removeItem = (i: number) => {
-    let copy = shoppingList.filter((element, index) => index !== i);
+    let copy = shoppingList.filter((element, index) => index !== i); // element wordt niet vermeld na de arrow, maar moet er wel staan!
     setShoppingList(copy);
 }
 ```
@@ -165,3 +168,8 @@ const SelectBox = () => {
     );
 }
 ```
+
+&nbsp;
+&nbsp;
+
+# NextJS
