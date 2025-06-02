@@ -254,3 +254,48 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 }
 ```
+
+&nbsp;
+## Server Side Rendering (SSR)
+**EXPORT moet er staan!** Daarbuiten kan je context als argument geven in de async functie om aan de parameters (context.params?.id) of cookies (context.req.cookies)
+```
+export const getServerSideProps : GetServerSideProps<PostsProps> = async (context) => {
+    const id = parseInt(context.params?.id as string);
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
+    const post = await response.json();
+    
+    if (!post) {
+        return {
+            notFound: true,
+        };
+    } else {
+      return {
+          props: {
+              post
+          },
+      };
+    }
+};
+```
+Vervolgens kan je je data doorgeven aan uw component
+```
+const Posts = ({ posts }: { posts: Post[] }) => {
+  return (
+    <ul>
+      {posts.map((post) => (
+        <li key={post.id}>{post.title}</li>
+      ))}
+    </ul>
+  );
+};
+```
+
+&nbsp;
+### Not found & redirect
+Als je in je getServerSideProps functie een 404 not found wil teruggeven, dan kan je dit doen door een notFound property toe te voegen aan het return object. 
+
+[Not found & redirect](https://similonap.github.io/webframeworks-cursus/wf-course/nextjs/rendering/ssr#not-found) (link naar cursus)
+
+&nbsp;
+## Static Site Generation (SSG)
+[getStaticPaths & getStaticProps](https://similonap.github.io/webframeworks-cursus/wf-course/nextjs/rendering/ssg#getstaticpaths) (link naar cursus)
